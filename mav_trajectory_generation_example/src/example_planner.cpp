@@ -1,17 +1,16 @@
 #include <mav_trajectory_generation_example/example_planner.h>
 
-ExamplePlanner::ExamplePlanner(ros::NodeHandle& nh) :
-    nh_(nh),
+ExamplePlanner::ExamplePlanner() :
     max_v_(2.0),
     max_a_(2.0),
     current_velocity_(Eigen::Vector3d::Zero()),
     current_pose_(Eigen::Affine3d::Identity()) {
       
   // Load params
-  if (!nh_.getParam(ros::this_node::getName() + "/max_v", max_v_)){
+  if (!nh.getParam(ros::this_node::getName() + "/max_v", max_v_)){
     ROS_WARN("[example_planner] param max_v not found");
   }
-  if (!nh_.getParam(ros::this_node::getName() + "/max_a", max_a_)){
+  if (!nh.getParam(ros::this_node::getName() + "/max_a", max_a_)){
     ROS_WARN("[example_planner] param max_a not found");
   }
 

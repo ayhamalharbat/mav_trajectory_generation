@@ -7,21 +7,32 @@ catkin_simple(ALL_DEPS_REQUIRED)
 set(CMAKE_MACOSX_RPATH 0)
 add_definitions(-std=c++11)
 
+###########
+## Build ##
+###########
+
+## Specify additional locations of header files
+## Your package locations should be listed before other locations
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
+
 ############
 # BINARIES #
 ############
-cs_add_executable(trajectory_generation_example
-        src/example_planner.cc
-        src/example_planner_node.cc
+add_executable(trajectory_generation_example
+        src/example_planner.cpp
+        src/example_planner_node.cpp
 )
 
-cs_add_executable(trajectory_generation_6dof_example
-        src/example_planner_6dof.cc
-        src/example_planner_6dof_node.cc
+add_dependencies(trajectory_generation_example ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+target_link_libraries(trajectory_generation_example
+${catkin_LIBRARIES}
 )
 
 ##########
 # EXPORT #
 ##########
-cs_install()
-cs_export()
+# install()
+# export()

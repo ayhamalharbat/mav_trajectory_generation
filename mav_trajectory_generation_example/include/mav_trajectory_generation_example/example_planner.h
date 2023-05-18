@@ -12,7 +12,7 @@
 
 class ExamplePlanner {
  public:
-  ExamplePlanner(ros::NodeHandle& nh);
+  ExamplePlanner();
 
   void uavOdomCallback(const nav_msgs::Odometry::ConstPtr& pose);
 
@@ -34,11 +34,11 @@ class ExamplePlanner {
   bool publishTrajectory(const mav_trajectory_generation::Trajectory& trajectory);
 
  private:
+  ros::NodeHandle nh;
   ros::Publisher pub_markers_;
   ros::Publisher pub_trajectory_;
   ros::Subscriber sub_odom_;
 
-  ros::NodeHandle& nh_;
   Eigen::Affine3d current_pose_;
   Eigen::Vector3d current_velocity_;
   Eigen::Vector3d current_angular_velocity_;
